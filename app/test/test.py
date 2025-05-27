@@ -1,7 +1,6 @@
 import pytest
 from app.service.entities import EuropeConverter, AsiaConverter, WorldwideConverter, InvalidCurrencyError, CurrencyConverter
 
-# Пример курсов валют для тестирования
 EXCHANGE_RATES = {
     "USD": {"EUR": 0.9, "JPY": 130.0},
     "EUR": {"USD": 1.1, "JPY": 145.0},
@@ -24,7 +23,6 @@ def test_currency_converter_abstract_methods():
     with pytest.raises(TypeError):
         converter = CurrencyConverter()
 
-# Тесты для EuropeConverter
 def test_europe_converter_valid_conversion(europe_converter):
     result = europe_converter.calculate(100, "USD", "EUR")
     assert result["converted_amount"] == 90.0
@@ -54,7 +52,6 @@ def test_europe_converter_negative_amount(europe_converter):
         europe_converter.calculate(-100, "USD", "EUR")
     assert "amount must be greater than 0" in str(excinfo.value)
 
-# Тесты для AsiaConverter
 def test_asia_converter_valid_conversion(asia_converter):
     result = asia_converter.calculate(100, "USD", "JPY")
     assert result["converted_amount"] == 13000.0
@@ -84,7 +81,6 @@ def test_asia_converter_negative_amount(asia_converter):
         asia_converter.calculate(-100, "USD", "JPY")
     assert "amount must be greater than 0" in str(excinfo.value)
 
-# Тесты для WorldwideConverter
 def test_worldwide_converter_valid_conversion(worldwide_converter):
     result = worldwide_converter.calculate(100, "EUR", "USD")
     assert result["converted_amount"] == 110.0
