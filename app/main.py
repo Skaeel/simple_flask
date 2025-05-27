@@ -43,7 +43,7 @@ def convert():
         )
         
         response = ConversionResponse(**result)
-        return jsonify(response.dict()), 200
+        return jsonify(response.model_dump()), 200
     
     except InvalidCurrencyError as e:
         return jsonify({"error": str(e)}), 400
